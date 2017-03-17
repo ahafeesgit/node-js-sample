@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <style>
+         table {
+         font-family: arial, sans-serif;
+         border-collapse: collapse;
+         width: 100%;
+         }
+         td, th {
+         border: 1px solid #dddddd;
+         text-align: left;
+         padding: 8px;
+         }
+         tr:nth-child(even) {
+         background-color: #dddddd;
+         }
+      </style>
+      <title>MY APP</title>
+      <script>
+function validateForm() {
+    var animalname = document.forms["myForm"]["name"].value;
+    var animaleimage = document.forms["myForm"]["file"].value;
+    if (animalname == "") {
+        alert("Name is empty");
+        return false;
+    }
+    if (animaleimage == "") {
+        alert("Image is empty");
+        return false;
+    }
+}
+</script>
+   </head>
+   <body>
+      <h1>
+         Add Your Data
+      </h1>
+      </br>
+      <form name="myForm" action="/uploadfile" onsubmit="return validateForm()"  method="POST" enctype="multipart/form-data">
+         <input type="text" placeholder="Name" name="name">
+         <input type="file" name="file" accept="image/*"name="image"/>    
+         <span class="hint">Supported files: jpg, jpeg, png.</span>
+         <button type="submit">Add</button>
+      </form>
+      <h1>
+         Data List
+      </h1>
+      
+      <table>
+         <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Country</th>
+         </tr>
+         <ul class="datalist">
+            <% for(var i=0; i<datalist.length; i++) {%>
+         
+               <tr>
+                  <td>
+                     <h2>
+                        <%= datalist[i].name %>      
+                     </h2>
+                  </td>
+                  <td><img class="logo" src=<%= datalist[i].image_path %>  alt="My_Logo" height="150" width="150"  /></td>
+                  <td></td>
+               </tr>
+            
+            <% } %>
+         </ul>
+      </table>
+   </body>
+</html>
